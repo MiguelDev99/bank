@@ -1,6 +1,5 @@
-package com.example.bank.domain;
+package com.example.bank.dto;
 
-import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -10,22 +9,12 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.io.Serializable;
-import java.util.List;
-
-@Entity
-@Table(name = "document_type")
-@NamedQuery(name = "DocumentType.findAll", query = "SELECT d FROM DocumentType d")
-
 @Data
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class DocumentType implements Serializable {
-    private static final long serialVersionUID = 1L;
+@Builder
+public class DocumentTypeDTO {
 
-    @Id
-    @Column(name = "doty_id")
     @NotNull
     @Min(1)
     private Integer dotyId;
@@ -37,8 +26,4 @@ public class DocumentType implements Serializable {
     @NotEmpty
     @Size(min = 4, max = 255)
     private String name;
-
-    @OneToMany(mappedBy = "documentType")
-    private List<Customer> customers;
-
 }

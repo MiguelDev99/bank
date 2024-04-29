@@ -14,9 +14,9 @@ import java.util.List;
 @NamedQuery(name = "Customer.findAll",query = "SELECT c FROM Customer c")
 
 @Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
 public class Customer implements Serializable {
     private static final long serialVersionUID = 1L;
 

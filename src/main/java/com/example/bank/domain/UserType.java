@@ -2,6 +2,7 @@ package com.example.bank.domain;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -13,6 +14,7 @@ import java.util.List;
 @NamedQuery(name = "UserType.findAll",query = "SELECT u FROM UserType u")
 
 @Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserType implements Serializable {
@@ -20,7 +22,7 @@ public class UserType implements Serializable {
 
     @Id
     @Column(name = "usty_id")
-    private String ustyId;
+    private Integer ustyId;
 
     private String enable;
 

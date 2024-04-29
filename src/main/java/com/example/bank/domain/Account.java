@@ -1,7 +1,9 @@
 package com.example.bank.domain;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -13,6 +15,7 @@ import java.util.List;
 @NamedQuery(name = "Account.findAll", query = "SELECT a FROM Account a")
 
 @Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class Account implements Serializable {
@@ -23,6 +26,7 @@ public class Account implements Serializable {
 
     private BigDecimal balance;
 
+    @NotNull
     private String enable;
 
     private String password;

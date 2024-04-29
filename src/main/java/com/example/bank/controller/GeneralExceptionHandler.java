@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-
 @ControllerAdvice
 public class GeneralExceptionHandler extends ResponseEntityExceptionHandler {
 
@@ -38,7 +37,7 @@ public class GeneralExceptionHandler extends ResponseEntityExceptionHandler {
     private static final String TIMESTAMP = "timestamp";
     private static final String TYPE = "type";
 
-    /*@Override
+    //@Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException exception,
                                                                   HttpHeaders headers, HttpStatus status, WebRequest request) {
         List<String> validationErrors = exception.getBindingResult().getFieldErrors().stream()
@@ -47,12 +46,12 @@ public class GeneralExceptionHandler extends ResponseEntityExceptionHandler {
         return getExceptionResponseEntity(exception, HttpStatus.BAD_REQUEST, request, validationErrors);
     }
 
-    @Override
+    //@Override
     protected ResponseEntity<Object> handleHttpMessageNotReadable(HttpMessageNotReadableException exception,
                                                                   HttpHeaders headers, HttpStatus status, WebRequest request) {
         return getExceptionResponseEntity(exception, status, request,
                 Collections.singletonList(exception.getLocalizedMessage()));
-    }*/
+    }
 
     @ExceptionHandler({ ConstraintViolationException.class })
     public ResponseEntity<Object> handleConstraintViolation(ConstraintViolationException exception,

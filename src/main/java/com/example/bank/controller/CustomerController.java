@@ -4,6 +4,8 @@ import com.example.bank.domain.Customer;
 import com.example.bank.dto.CustomerDTO;
 import com.example.bank.mapper.CustomerMapper;
 import com.example.bank.service.CustomerService;
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +15,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1/customers")
+@RequiredArgsConstructor
 @CrossOrigin("*")
 public class CustomerController {
 
@@ -22,8 +25,8 @@ public class CustomerController {
     @Autowired
     CustomerMapper customerMapper;
 
-    @PostMapping("/save")
-    public ResponseEntity<?> save(@RequestBody CustomerDTO customerDTO)throws Exception{
+    @PostMapping
+    public ResponseEntity<?> save(@RequestBody @Valid CustomerDTO customerDTO)throws Exception{
         Customer customer = customerMapper.toCustomer(customerDTO);
 
         customer = customerService.save(customer);
@@ -32,8 +35,8 @@ public class CustomerController {
         return ResponseEntity.ok().body(customerDTO);
     }
 
-    @PutMapping("/update")
-    public ResponseEntity<?> update(@RequestBody CustomerDTO customerDTO)throws Exception{
+    @PutMapping
+    public ResponseEntity<?> update(@RequestBody @Valid CustomerDTO customerDTO)throws Exception{
         Customer customer = customerMapper.toCustomer(customerDTO);
 
         customer = customerService.update(customer);
@@ -42,7 +45,7 @@ public class CustomerController {
         return ResponseEntity.ok().body(customerDTO);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable("id") Integer id) throws Exception{
 
         customerService.deleteById(id);
@@ -50,7 +53,7 @@ public class CustomerController {
         return ResponseEntity.ok().body(null);
     }
 
-    @GetMapping("/findAll")
+    @GetMapping
     public ResponseEntity<?> findAll() throws Exception{
         List<Customer> customers = customerService.findAll();
         List<CustomerDTO> customerDTOs=customerMapper.toCustomerDTOs(customers);
@@ -58,7 +61,7 @@ public class CustomerController {
         return ResponseEntity.ok().body(customerDTOs);
     }
 
-    @GetMapping("/findById/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<?> findById(@PathVariable("id") Integer id) throws Exception{
         Customer customer = null;
         CustomerDTO customerDTO = null;
